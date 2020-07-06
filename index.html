@@ -1,0 +1,141 @@
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="index.css">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+  <title>علامات الطالب </title>
+</head>
+<body>
+ <div class="container">
+  <div class="card" style=" width:40%;margin-left: auto; margin-right: auto; margin-top: 3%; " >
+    
+    <img src="logo.jpg" class="card-img-top" alt="logo" style="padding: 20px;width: auto;" >
+    <div class="alert alert-danger " style="display:none;text-align: right;" id="alert-name" >
+      <strong > الرجاء تعبئة اسم الطالب الثلاثي المناسب  </strong>  
+    </div>
+      <div style="text-align: right; margin-right: 20px; padding: 10px;">
+      <label for="name">اسم الطالب الثلاثي</label>
+      <input type="text " name="name " id="name" size="30" required/>
+    </div>
+    <div class="alert alert-danger " style="display:none;text-align: right;" id="alert-number" >
+      <strong >  الرجاء تعبئة رقم جلوس الطالب المناسب (170881) </strong>  
+    </div>
+    <div style="text-align: right;
+    margin-right: 10px; padding:10px">
+      <label for="name">رقم جلوس الطالب</label>
+      <input type="text " name="number " id="number"
+     size="33" maxlength="8" required
+      />
+    </div>
+    <div class="container" id="aguero" style="display:none;padding:10px;">
+      
+      <img src="giphy.gif" width="auto" height="auto">
+      <div class="alert alert-danger "  style="text-align: right;" id="alert-number" >
+        <strong >الرجاء اختيار الفريق الأفضل الصحيح  </strong>  
+        </div>
+    </div>
+      <div style="text-align: right;
+    margin-right: 6px; padding:16px">
+      <label for="teams" > الفريق الأفضل </label>
+      <select name="teams" id="teams" style="margin-right: 20px ; width:15rem;"   >
+        <option value="Man City"  style="color:green"
+        selected id="first-option">Man City </option>
+        <option value="Bayern Munich" style="color:red"
+        >Bayern Munich</option>
+        
+      </select>
+      </div>
+    
+    
+      <a href="#" id="btn-confirm" style="padding:6px" class="btn btn-primary btn-block waves-light rgba-green-slight">تأكيد</a>
+      <a href="#" id="btn-clear" style="padding:6px" class="btn btn-light btn-block waves-light rgba-green-slight">تفريغ الحقول</a>
+      
+    </div>
+    
+    </div>
+    
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+  document.querySelector('#btn-confirm').addEventListener('click',CheckFields)
+  document.addEventListener('DOMContentLoaded',fillFields);
+  document.querySelector('#btn-clear').addEventListener('click',clearFields)
+  setTimeout(()=>{
+    localStorage.removeItem('name')
+    localStorage.removeItem('number')
+    localStorage.removeItem('team')
+  },300000)
+function CheckFields(e)
+{
+  e.preventDefault()
+  const name=document.querySelector('#name').value;
+  const number =document.querySelector('#number').value
+  var e = document.getElementById("teams");
+  const team_selection = e.options[e.selectedIndex].text;
+    console.log(name,number ,team_selection)
+    if(name==='' || 
+    name!== 'أسامة مصباح الرمحي')
+    {
+      $('#alert-name').slideDown(500).fadeOut(8000)
+      localStorage.setItem('name',JSON.stringify(''))
+
+    }
+      if(number==='' || number!=='170881')
+      {$('#alert-number').slideDown(500).fadeOut(10000)
+      localStorage.setItem('number',JSON.stringify(''))
+      }
+     if (team_selection==='Bayern Munich')
+    {
+      
+      $('#aguero').slideDown(2000).fadeOut(8000)
+      $('#teams').css('color','red')
+      localStorage.setItem('team',JSON.stringify(''))
+    }
+    
+    
+    
+if(name==='أسامة مصباح الرمحي' && number==='170881' && team_selection!=='Bayern Munich')
+ { 
+localStorage.setItem('number',JSON.stringify(number))
+  localStorage.setItem('name',JSON.stringify(name))
+  localStorage.setItem('team',JSON.stringify(team_selection))
+  localStorage.setItem('logged_in',JSON.stringify('true'))
+  
+  window.location.href="results.html"
+  
+ }
+
+}
+function fillFields(e)
+{
+  e.preventDefault()
+  document.querySelector('#name').value=JSON.parse(localStorage.getItem('name'));
+document.querySelector('#number').value  =JSON.parse(localStorage.getItem('number'))
+const team_selected=JSON.parse(localStorage.getItem('team'))
+if(team_selected==='Bayern Munich')
+{
+document.querySelector('#teams').style.color='red'
+document.querySelector('#teams').value='Bayern Munich'
+}
+else{
+  document.querySelector('#teams').style.color='green'
+document.querySelector('#teams').value='Man City'
+}
+
+}
+function clearFields(e)
+{
+  e.preventDefault()
+  document.querySelector('#name').value='';
+document.querySelector('#number').value  ='';
+
+}
+</script>
+
+</html>

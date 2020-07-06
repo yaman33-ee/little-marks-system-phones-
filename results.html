@@ -1,0 +1,99 @@
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="results.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>نتيجة الطالب </title>
+</head>
+<body>
+  <div class="container">
+    <p>
+      <img src="logo.jpg"  align="right" width="140px">
+    <h2 style="text-align: center; padding-top: 50px;"> الاسم : <b style="color: blue;">أسامة مصباح الرمحي </b></h2>
+    <h2 style="text-align: center; "> المبحث :  <b style="color: lightgreen;"><i> التربية الاسلامية    </i></b></h2>
+   
+  </p>
+      <table class="table-fill">
+      <thead>
+      <tr>
+        <th class="text-right" style="width: fit-content;">علامة الامتحان من 100  </th>
+      <th class="text-right">علامة الامتحان من 50  </th>
+      <th class="text-right">مادة الامتحان </th>
+      <th class="text-right">رقم الامتحان </th>
+      
+      </tr>
+      </thead>
+      <tbody class="table-hover">
+      <tr>
+        <td class="text-right">98/100</td>
+        <td class="text-right">49/50</td>
+        <td class="text-right"> الدروس 1-10 </td>
+      <td class="text-right"> #1</td>
+      </tr>
+      <tr>
+        <td class="text-right">98/100</td>
+        <td class="text-right">49/50</td>
+        <td class="text-right"> الدروس 10-20</td>
+      <td class="text-right"> #2</td>
+      </tr>
+      <tr>
+        <td class="text-right">98/100</td>
+        <td class="text-right">49/50</td>
+        <td class="text-right"> الدروس 20-30 </td>
+      <td class="text-right"> #3</td>
+      </tr>
+      <tr>
+        <td class="text-right">98/100</td>
+        <td class="text-right">49/50</td>
+        <td class="text-right">  الدروس 31-35</td>
+      <td class="text-right"> #4</td>
+      </tr>
+     
+     
+      </tbody>
+      
+      </table>
+      <button class="bubbly-button" style="text-align: center;">اظهار النتيجة الكلية </button>
+  </div>
+  
+</body>
+<script>
+   
+  document.addEventListener('DOMContentLoaded',checkloggedin);
+  
+  function checkloggedin(e)
+  {
+    e.preventDefault()
+    const logged_in=JSON.parse(localStorage.getItem('logged_in'))
+    console.log(logged_in)
+    setTimeout(() => {
+      localStorage.setItem('logged_in',JSON.stringify(false))
+      document.location.reload(true)
+    }, 600000);
+    if(logged_in===null || logged_in===false)
+    {
+    window.location.href='index.html'
+    
+    }
+    
+  }
+  var animateButton = function(e) {
+
+e.preventDefault;
+//reset animation
+e.target.classList.remove('animate');
+
+e.target.classList.add('animate');
+setTimeout(function(){
+  e.target.classList.remove('animate');
+},700);
+};
+
+var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+for (var i = 0; i < bubblyButtons.length; i++) {
+bubblyButtons[i].addEventListener('click', animateButton, false);
+}
+</script>
+</html>
